@@ -6,10 +6,16 @@
  * 3. Déployez sur votre serveur et testez !
  */
 
-$from = '';
-$to = '';
-$message = 'Hello World, sending a simple mail !';
+$from = 'olivier.peuchet02@gmail.com';
+$to = 'oliolive02@hotmail.fr';
+$message = "Définissez un message long d'au moins 120 caractères au choix,Définissez un message long d'au moins 120 caractères choix";
 // TODO Votre code ici.
+$message = wordwrap($message, 70 ,"/r/n");
+$subject = "un mail via Php";
+$header = array(
+    'X-Mailer' => 'PHP/' . phpversion()
+);
+
 
 
 /**
@@ -24,3 +30,9 @@ $message = 'Hello World, sending a simple mail !';
  *     N'écrasez pas les valeurs déjà existantes ( s'il y en a ).
  */
 // TODO Votre code ici.
+if (mail($to, $subject, $message, $header ,$from)) {
+    echo "Le message a bien été envoyé. Merci !";
+    $mails = file_put_contents('mails.txt', '$message ,$to');
+} else {
+    echo "Une erreur est survenue lors de l'envoi du mail";
+}
